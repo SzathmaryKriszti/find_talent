@@ -33,6 +33,11 @@ public class StartupService {
 
     @Bean
     public SmartInitializingSingleton init() {
+
+
+        repoRepository.deleteAll();
+        memberRepository.deleteAll();
+
         SmartInitializingSingleton singleton = new SmartInitializingSingleton() {
             @Override
             public void afterSingletonsInstantiated() {
