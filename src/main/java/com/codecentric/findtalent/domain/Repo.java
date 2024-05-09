@@ -1,12 +1,14 @@
 package com.codecentric.findtalent.domain;
 
 import jakarta.persistence.*;
+import org.kohsuke.github.GHRepository;
 
 @Entity
 @Table(name = "repos")
-public class Repository {
+public class Repo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "repo_id")
     private Long id;
 
@@ -15,14 +17,15 @@ public class Repository {
 
     private String language;
 
-    public Repository(Long id, Member member, String language) {
-        this.id = id;
+    public Repo(GHRepository ghRepository) {
+        this.id = ghRepository.getId();
         this.member = member;
-        this.language = language;
+        this.language = ghRepository.getLanguage();
     }
 
-    public Repository() {
+    public Repo() {
     }
+
 
     public void setId(Long id) {
         this.id = id;
