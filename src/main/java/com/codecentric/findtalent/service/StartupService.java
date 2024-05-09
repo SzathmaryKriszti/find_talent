@@ -49,33 +49,21 @@ public class StartupService {
                     for (GHUser ghUser : ghUsers) {
 
                         Member member = new Member(ghUser);
-                        memberRepository.save(member);
+                        Member savedMember = memberRepository.save(member);
                         Map<String, GHRepository> memberRepos = ghUser.getRepositories();
 
                         for (GHRepository ghRepository : memberRepos.values()) {
                             Repo repository = new Repo(ghRepository);
-                            repository.setMember(repository.getMember());
-
-
-
+                            repository.setMember(savedMember);
                             repoRepository.save(repository);
-
-//                            String language = ghRepository.getLanguage();
-
                         }
                     }
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
         };
         return singleton;
-
-
     }
-
-
 }
