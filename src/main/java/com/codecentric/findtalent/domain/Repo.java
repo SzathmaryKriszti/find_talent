@@ -7,24 +7,28 @@ import org.kohsuke.github.GHRepository;
 @Table(name = "repos")
 public class Repo {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "repo_id")
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     private String language;
 
     public Repo(GHRepository ghRepository) {
         this.id = ghRepository.getId();
-        this.member = member;
         this.language = ghRepository.getLanguage();
     }
 
+
     public Repo() {
     }
+
 
 
     public void setId(Long id) {

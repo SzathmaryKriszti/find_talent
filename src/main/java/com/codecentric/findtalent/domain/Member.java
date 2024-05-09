@@ -3,6 +3,7 @@ package com.codecentric.findtalent.domain;
 import jakarta.persistence.*;
 import org.kohsuke.github.GHUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,20 +12,21 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_id")
     private Long id;
 
     private String username;
 
     private String avatarUrl;
 
-    @OneToMany
-    @JoinTable(name = "members_repos", joinColumns = {@JoinColumn(name = "id")}, inverseJoinColumns = {@JoinColumn(name = "repo_id")})
+    @OneToMany(mappedBy = "member")
     private List<Repo> repository;
 
     public Member(GHUser ghUser) {
         this.id = ghUser.getId();
         this.username = ghUser.getLogin();
         this.avatarUrl = ghUser.getAvatarUrl();
+        this.repository = new ArrayList<>();
     }
 
     public Member() {
@@ -43,8 +45,8 @@ public class Member {
         return repository;
     }
 
-    public void setRepository(Repo repository) {
-            this.repository.add(repository);
+    public void setRepository(List<Repo> repository) {
+        this.repository = repository;
     }
 
     public String getUsername() {
