@@ -1,0 +1,59 @@
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <!-- text - start -->
+    <div class="mb-10 md:mb-10">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Find Talent</h2>
+
+      <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">With this application, you will be able to find developers who can work in the programming language of your choice. If you click on their cards, you can see their GitHub repositories.</p>
+    </div>
+    <!-- text - end -->
+
+
+    <form [formGroup]="searchForm" (ngSubmit)="search()" class="max-w-md mx-auto py-6 sm:py-8 lg:py-10">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+          </svg>
+        </div>
+        <input type="text" autocomplete="off" id="default-search" formControlName="language" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Java, Scala, Kotlin..." required />
+        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-purple-400 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-purple-400 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Search</button>
+      </div>
+    </form>
+
+
+
+    <div  class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 py-6 sm:py-8 lg:py-10">
+      <!-- article - start -->
+      <div *ngFor="let member of members" class="flex flex-col overflow-hidden rounded-lg border bg-white">
+        <a class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
+          <img [src]="member.avatarUrl" loading="lazy" alt="Photo by Minh Pham" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+        </a>
+
+        <div class="flex flex-1 flex-col p-4 sm:p-6">
+          <h2 class="mb-2 text-lg font-semibold text-gray-700 text-center">
+            <a class="transition duration-100 hover:text-indigo-500 active:text-indigo-600">{{member.username}}</a>
+          </h2>
+
+          <div class="mt-auto flex items-end justify-between">
+            <div class="flex items-center gap-2">
+              <div class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                <img [src]="member.avatarUrl" loading="lazy" alt="Photo by Brock Wegner" class="h-full w-full object-cover object-center" />
+              </div>
+
+              <div>
+<!--                <span class="block text-indigo-500">Mike Lane</span>-->
+<!--                <span class="block text-sm text-gray-400">July 19, 2021</span>-->
+              </div>
+            </div>
+
+            <span class="rounded border px-2 py-1 text-sm text-gray-500">See repos</span>
+          </div>
+        </div>
+      </div>
+      <!-- article - end -->
+
+    </div>
+  </div>
+</div>
