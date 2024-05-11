@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SearchService} from "../../services/search.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-member-details',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberDetailsComponent implements OnInit {
 
-  constructor() { }
+  id: any = 0;
 
-  ngOnInit(): void {
+  constructor(private searchService: SearchService,
+              private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.paramMap.subscribe(paramResponse => {
+      this.id = paramResponse.get('id');
+    })
   }
 
+  ngOnInit(): void {
+    this.loadMemberDetails(this.id);
+  }
+
+  loadMemberDetails(id: number) {
+    this.searchService.loadMemberDetails(id)
+  }
 }

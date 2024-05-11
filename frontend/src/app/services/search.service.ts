@@ -14,5 +14,9 @@ export class SearchService {
 
   search(language: string):Observable<Array<MemberDetailsItemModel>>{
     return this.http.get<Array<MemberDetailsItemModel>>(`${BASE_URL}/member?language=${language}`)
-  }
+  };
+
+  loadMemberDetails(id: number):Observable<MemberDetailsItemModel>{
+    return this.http.get<MemberDetailsItemModel>(`${BASE_URL}/member/${id}`)
+  };
 }
