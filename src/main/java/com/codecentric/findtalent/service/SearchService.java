@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +31,8 @@ public class SearchService {
         List<Repo> repos = repoRepository.findReposByLanguage(language);
 
         for (Repo repo : repos) {
-           Member member = repo.getMember();
-           membersByLanguage.add(member);
+            Member member = repo.getMember();
+            membersByLanguage.add(member);
         }
 
         Set<Member> uniqueMembers = new HashSet<>(membersByLanguage);
@@ -47,4 +44,9 @@ public class SearchService {
     }
 
 
+    public Optional<MemberDetailsItem> getMemberDetails(Long id) {
+        Optional<Member> optionalMember = memberRepository.findById(id);
+
+        return optionalMember.map(MemberDetailsItem::new);
+    }
 }

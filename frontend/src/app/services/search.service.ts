@@ -17,6 +17,6 @@ export class SearchService {
   };
 
   loadMemberDetails(id: number):Observable<MemberDetailsItemModel>{
-    return this.http.get<MemberDetailsItemModel>(`${BASE_URL}/member/${id}`)
+    return this.http.get<MemberDetailsItemModel>(`${BASE_URL}/member-details/${id}`)
   };
 }
