@@ -12,5 +12,5 @@ import java.util.List;
 public interface RepoRepository extends JpaRepository<Repo, Long> {
 
     @Query("SELECT r FROM Repo r WHERE r.language = :language")
-    List<Repo> findRepoByLanguage(String language);
+    List<Repo> findReposByLanguage(String language);
 }
