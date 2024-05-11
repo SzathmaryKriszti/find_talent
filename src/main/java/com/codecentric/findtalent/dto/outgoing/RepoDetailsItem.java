@@ -9,14 +9,14 @@ public class RepoDetailsItem {
 private Long id;
 private String member;
 private String language;
-private String url;
+private URL url;
 
 
     public RepoDetailsItem(Repo repo) {
         this.id = repo.getId();
         this.member = repo.getMember().getUsername();
         this.language = repo.getLanguage();
-        this.url = repo.getUrl().toString();
+        this.url = repo.getUrl();
     }
 
 
@@ -45,11 +45,11 @@ private String url;
         this.language = language;
     }
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 
