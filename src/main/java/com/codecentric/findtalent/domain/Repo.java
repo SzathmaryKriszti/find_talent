@@ -27,12 +27,20 @@ public class Repo {
 
     private String createdAt;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
 
     public Repo(GHRepository ghRepository) {
         this.id = ghRepository.getId();
         this.language = ghRepository.getLanguage();
         this.url = ghRepository.getHtmlUrl();
         this.repoName = ghRepository.getFullName();
+        if (ghRepository.getDescription() == null) {
+            this.description = "no description";
+        } else {
+            this.description = ghRepository.getDescription();
+        }
         try {
             this.createdAt = ghRepository.getCreatedAt().toString();
         } catch (IOException e) {
@@ -92,5 +100,13 @@ public class Repo {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

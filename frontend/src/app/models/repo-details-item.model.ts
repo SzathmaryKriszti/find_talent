@@ -6,5 +6,6 @@ export interface RepoDetailsItemModel{
   url: URL;
   repoName: string;
   createdAt: string;
+  description: string;
 
 }

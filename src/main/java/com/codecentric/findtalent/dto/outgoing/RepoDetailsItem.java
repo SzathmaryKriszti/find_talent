@@ -6,13 +6,13 @@ import java.net.URL;
 
 public class RepoDetailsItem {
 
-private Long id;
-private String member;
-private String language;
-private URL url;
-private String repoName;
-private String createdAt;
-
+    private Long id;
+    private String member;
+    private String language;
+    private URL url;
+    private String repoName;
+    private String createdAt;
+    private String description;
 
 
     public RepoDetailsItem(Repo repo) {
@@ -22,8 +22,8 @@ private String createdAt;
         this.url = repo.getUrl();
         this.repoName = repo.getRepoName();
         this.createdAt = repo.getCreatedAt();
+        this.description = repo.getDescription();
     }
-
 
 
     public Long getId() {
@@ -72,5 +72,13 @@ private String createdAt;
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
