@@ -4,5 +4,7 @@ export interface RepoDetailsItemModel{
   member: string;
   language: string;
   url: URL;
+  repoName: string;
+  createdAt: string;
 
 }

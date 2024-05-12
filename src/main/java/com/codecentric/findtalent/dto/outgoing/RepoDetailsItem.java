@@ -10,6 +10,9 @@ private Long id;
 private String member;
 private String language;
 private URL url;
+private String repoName;
+private String createdAt;
+
 
 
     public RepoDetailsItem(Repo repo) {
@@ -17,6 +20,8 @@ private URL url;
         this.member = repo.getMember().getUsername();
         this.language = repo.getLanguage();
         this.url = repo.getUrl();
+        this.repoName = repo.getRepoName();
+        this.createdAt = repo.getCreatedAt();
     }
 
 
@@ -53,4 +58,19 @@ private URL url;
         this.url = url;
     }
 
+    public String getRepoName() {
+        return repoName;
+    }
+
+    public void setRepoName(String repoName) {
+        this.repoName = repoName;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 }

@@ -3,6 +3,7 @@ package com.codecentric.findtalent.domain;
 import jakarta.persistence.*;
 import org.kohsuke.github.GHRepository;
 
+import java.io.IOException;
 import java.net.URL;
 
 @Entity
@@ -22,17 +23,26 @@ public class Repo {
 
     private URL url;
 
+    private String repoName;
+
+    private String createdAt;
+
 
     public Repo(GHRepository ghRepository) {
         this.id = ghRepository.getId();
         this.language = ghRepository.getLanguage();
         this.url = ghRepository.getHtmlUrl();
+        this.repoName = ghRepository.getFullName();
+        try {
+            this.createdAt = ghRepository.getCreatedAt().toString();
+        } catch (IOException e) {
+            this.createdAt = "Sorry, we don't know the date of creation.";
+        }
     }
 
 
     public Repo() {
     }
-
 
 
     public void setId(Long id) {
@@ -67,4 +77,20 @@ public class Repo {
         this.url = url;
     }
 
+
+    public String getRepoName() {
+        return repoName;
+    }
+
+    public void setRepoName(String repoName) {
+        this.repoName = repoName;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 }
