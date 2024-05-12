@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search.service";
 import {ActivatedRoute} from "@angular/router";
+import {MemberDetailsItemModel} from "../../models/member-details-item.model";
 
 @Component({
   selector: 'app-member-details',
@@ -10,6 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 export class MemberDetailsComponent implements OnInit {
 
   id: any = 0;
+  memberDetails! : MemberDetailsItemModel;
 
   constructor(private searchService: SearchService,
               private activatedRoute: ActivatedRoute) {
@@ -23,6 +25,9 @@ export class MemberDetailsComponent implements OnInit {
   }
 
   loadMemberDetails(id: number) {
-    this.searchService.loadMemberDetails(id)
+    this.searchService.loadMemberDetails(id).subscribe({
+      next: value => this.memberDetails = this.memberDetails = value,
+      error: err => console.error(err)
+    });
   }
 }
