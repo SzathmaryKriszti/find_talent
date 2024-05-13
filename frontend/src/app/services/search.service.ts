@@ -13,7 +13,7 @@ export class SearchService {
   constructor(private http : HttpClient) { }
 
   search(language: string):Observable<Array<MemberDetailsItemModel>>{
-    return this.http.get<Array<MemberDetailsItemModel>>(`${BASE_URL}/member?language=${language}`)
+    return this.http.get<Array<MemberDetailsItemModel>>(`${BASE_URL}/member?language=${encodeURIComponent(language)}`)
   };
 
   loadMemberDetails(id: number):Observable<MemberDetailsItemModel>{
