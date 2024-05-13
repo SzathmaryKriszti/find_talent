@@ -10,6 +10,9 @@ public class MemberDetailsItem {
     private Long id;
     private String username;
     private String name;
+    private String location;
+    private String email;
+    private String bio;
     private String createdAt;
     private String avatarUrl;
     private List<RepoDetailsItem> repoDetailsItemList;
@@ -18,6 +21,9 @@ public class MemberDetailsItem {
         this.id = member.getId();
         this.username = member.getUsername();
         this.name = member.getName();
+        this.location = member.getLocation();
+        this.email = member.getEmail();
+        this.bio = member.getBio();
         this.createdAt = member.getCreatedAt();
         this.avatarUrl = member.getAvatarUrl();
         this.repoDetailsItemList = member.getRepository().stream().map(RepoDetailsItem::new).collect(Collectors.toList());
@@ -40,14 +46,6 @@ public class MemberDetailsItem {
         this.username = username;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
     public String getName() {
         return name;
     }
@@ -56,12 +54,44 @@ public class MemberDetailsItem {
         this.name = name;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public List<RepoDetailsItem> getRepoDetailsItemList() {

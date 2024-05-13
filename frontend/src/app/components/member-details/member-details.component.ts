@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MemberDetailsItemModel} from "../../models/member-details-item.model";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-member-details',
@@ -14,7 +15,9 @@ export class MemberDetailsComponent implements OnInit {
   memberDetails! : MemberDetailsItemModel;
 
   constructor(private searchService: SearchService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private location : Location,
+              private router: Router) {
     this.activatedRoute.paramMap.subscribe(paramResponse => {
       this.id = paramResponse.get('id');
     })
@@ -29,5 +32,9 @@ export class MemberDetailsComponent implements OnInit {
       next: value => this.memberDetails = this.memberDetails = value,
       error: err => console.error(err)
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

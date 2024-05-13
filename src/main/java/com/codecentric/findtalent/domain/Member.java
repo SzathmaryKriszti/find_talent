@@ -20,6 +20,12 @@ public class Member {
 
     private String name;
 
+    private String location;
+
+    private String email;
+
+    private String bio;
+
     private String createdAt;
 
     private String avatarUrl;
@@ -32,15 +38,28 @@ public class Member {
         this.username = ghUser.getLogin();
         try {
             this.name = ghUser.getName();
-            this.createdAt =ghUser.getCreatedAt().toString();
-            if (ghUser.getName() == null){
+            this.location = ghUser.getLocation();
+            this.email = ghUser.getEmail();
+            this.bio = ghUser.getBio();
+            this.createdAt = ghUser.getCreatedAt().toString();
+            if (ghUser.getName() == null) {
                 this.name = "This user has not provided a name";
             }
-            if (ghUser.getCreatedAt() == null){
+            if (ghUser.getLocation() == null) {
+                this.location = "Sorry, we don't know the location.";
+            }
+            if (ghUser.getEmail() == null) {
+                this.email = "Sorry, we don't know the email.";
+            }
+            if (ghUser.getBio() == null) {
+                this.bio = "This user has not provided a bio";
+            }
+            if (ghUser.getCreatedAt() == null) {
                 this.createdAt = "Sorry, we don't know the date of creation.";
             }
-        } catch (IOException e){
-            this.name = "This user has not provided a name";
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            System.out.println("Could not find file");
         }
         this.avatarUrl = ghUser.getAvatarUrl();
         this.repository = new ArrayList<>();
@@ -50,20 +69,12 @@ public class Member {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public List<Repo> getRepository() {
-        return repository;
-    }
-
-    public void setRepository(List<Repo> repository) {
-        this.repository = repository;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -82,6 +93,30 @@ public class Member {
         this.name = name;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
@@ -96,5 +131,13 @@ public class Member {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public List<Repo> getRepository() {
+        return repository;
+    }
+
+    public void setRepository(List<Repo> repository) {
+        this.repository = repository;
     }
 }
