@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MemberDetailsItemModel} from "../../models/member-details-item.model";
 
 @Component({
@@ -11,13 +11,20 @@ import {MemberDetailsItemModel} from "../../models/member-details-item.model";
 export class MemberDetailsComponent implements OnInit {
 
     id: any = 0;
+    language: string = '';
     memberDetails!: MemberDetailsItemModel;
+
 
     constructor(private searchService: SearchService,
                 private activatedRoute: ActivatedRoute) {
         this.activatedRoute.paramMap.subscribe(paramResponse => {
             this.id = paramResponse.get('id');
         })
+        this.activatedRoute.queryParams.subscribe(
+            params => {
+                this.language = params['language'];
+            }
+        );
     }
 
     ngOnInit(): void {
@@ -31,4 +38,7 @@ export class MemberDetailsComponent implements OnInit {
         });
     }
 
+    back() {
+        history.back()
+    }
 }

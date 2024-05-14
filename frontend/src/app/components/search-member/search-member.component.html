@@ -25,7 +25,7 @@
 
 
     <div  class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 py-6 sm:py-8 lg:py-10">
-      <!-- article - start -->
+      <!-- cards - start -->
       <div *ngFor="let member of members" (click)="loadRepos(member.id)" class="flex flex-col overflow-hidden rounded-lg border bg-white">
         <a class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
           <img [src]="member.avatarUrl" loading="lazy" alt="Member avatar" class="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
@@ -48,11 +48,10 @@
               </div>
             </div>
 
-<!--            <span class="rounded border px-2 py-1 text-sm text-gray-500">See repos</span>-->
           </div>
         </div>
       </div>
-      <!-- article - end -->
+      <!-- cards - end -->
 
     </div>
   </div>

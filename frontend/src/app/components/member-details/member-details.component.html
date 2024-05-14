@@ -5,7 +5,7 @@
 
       <div>
         <div class="pb-10">
-        <button type="button" routerLink="/"  class="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Back</button>
+        <button type="button" (click)="back()" class="text-white end-2.5 bottom-2.5 bg-green-400 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-greeen-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-400">Back</button>
         </div>
         <img [src]="memberDetails.avatarUrl" loading="lazy" alt="Member avatar"
              class="max-h-15 max-w-15 object-cover object-center rounded-full shadow-lg"/>
