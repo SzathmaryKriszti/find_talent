@@ -11,6 +11,7 @@ import org.kohsuke.github.GitHub;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,7 @@ public class StartupService {
     }
 
     @Bean
+    @Profile("!test")
     public SmartInitializingSingleton init() {
 
 
@@ -41,11 +43,10 @@ public class StartupService {
         SmartInitializingSingleton singleton = new SmartInitializingSingleton() {
             @Override
             public void afterSingletonsInstantiated() {
-                GitHub github = null;
+                GitHub github;
 
                 try {
                     github = GitHub.connect();
-                    //        GitHub github = GitHub.connectAnonymously();
 
                     GHOrganization org = github.getOrganization("codecentric");
 
