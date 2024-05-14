@@ -13,7 +13,6 @@ export class SearchMemberComponent implements OnInit {
 
     members: Array<MemberDetailsItemModel> = [];
     searchForm!: FormGroup
-    language: string = '';
 
     constructor(private searchService: SearchService,
                 private formBuilder: FormBuilder,
@@ -24,32 +23,29 @@ export class SearchMemberComponent implements OnInit {
         })
         this.activatedRoute.queryParams.subscribe(
             params => {
-                this.language = params['language'];
+                this.searchForm.controls['language'].setValue(params['language'])
             }
         );
     }
 
     ngOnInit(): void {
-        if (this.language){
             this.search();
-        }
     }
 
 
     search() {
-        if (!this.language) {
-        this.language = this.searchForm.get('language')?.value;
-    }
-        this.searchService.search(this.language).subscribe({
-            next: (value) => {
-                this.members = this.members = value
-                this.router.navigate([''], {queryParams: {language: this.language}})
-            },
-            error: err => console.error(err)
-        });
+        if(this.searchForm.get('language')?.value) {
+            this.searchService.search(this.searchForm.get('language')?.value).subscribe({
+                next: (value) => {
+                    this.members = this.members = value
+                    this.router.navigate([''], {queryParams: {language: this.searchForm.get('language')?.value}})
+                },
+                error: err => console.error(err)
+            });
+        }
     }
 
     loadRepos(id: number) {
-        this.router.navigate(["/member-details/" + id], {queryParams: {language: this.language}});
+        this.router.navigate(["/member-details/" + id], {queryParams: {language: this.searchForm.get('language')?.value}});
     }
 }
