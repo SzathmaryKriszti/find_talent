@@ -83,8 +83,8 @@ public class SearchServiceTest {
 
         List<MemberDetailsItem> actualMemberDetailsItems = testSearchService.searchMemberByLanguage(language);
 
-        assertEquals(2, actualMemberDetailsItems.size());
         Assertions.assertFalse(actualMemberDetailsItems.isEmpty());
+        assertEquals(2, actualMemberDetailsItems.size());
 
     }
 }
