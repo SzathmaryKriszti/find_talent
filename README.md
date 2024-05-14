@@ -25,6 +25,8 @@ password: test1234
 
 - before you start the Srping application export your newly created token as an environment variable like this:
 
-`export GITHUB_OAUTH=<your-token>` This is necessary because GitHub Api has a rate limit of 60 requests per hour, and this 
+`export GITHUB_OAUTH=<your-token>` This is necessary because GitHub Api has a [rate limit](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users) of 60 requests per hour, and this 
 
 application starts more than 60 requests. But with the token, you can start 5000 requests per hour.
+
+- and now you will be able to find developers at Codecentric who can work in the programming language of your choice. 
