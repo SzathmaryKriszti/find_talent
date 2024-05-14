@@ -58,7 +58,7 @@ public class Member {
                 this.createdAt = "Sorry, we don't know the date of creation.";
             }
         } catch (IOException e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             System.out.println("Could not find file");
         }
         this.avatarUrl = ghUser.getAvatarUrl();

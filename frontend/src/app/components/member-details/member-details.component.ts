@@ -14,8 +14,7 @@ export class MemberDetailsComponent implements OnInit {
     memberDetails!: MemberDetailsItemModel;
 
     constructor(private searchService: SearchService,
-                private activatedRoute: ActivatedRoute,
-                private router: Router) {
+                private activatedRoute: ActivatedRoute) {
         this.activatedRoute.paramMap.subscribe(paramResponse => {
             this.id = paramResponse.get('id');
         })

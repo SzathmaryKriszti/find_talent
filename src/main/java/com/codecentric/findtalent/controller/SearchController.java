@@ -23,7 +23,7 @@ public class SearchController {
 
     @GetMapping("/member")
     public ResponseEntity<List<MemberDetailsItem>> searchMemberByLanguage(@RequestParam String language) {
-        return new ResponseEntity<List<MemberDetailsItem>>(searchService.searchMemberByLanguage(language), HttpStatus.OK);
+        return new ResponseEntity<>(searchService.searchMemberByLanguage(language), HttpStatus.OK);
     }
 
     @GetMapping("/member-details/{id}")
@@ -34,6 +34,6 @@ public class SearchController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         MemberDetailsItem memberDetailsItem = optionalMemberDetailsItem.get();
-        return new ResponseEntity<MemberDetailsItem>(memberDetailsItem, HttpStatus.OK);
+        return new ResponseEntity<>(memberDetailsItem, HttpStatus.OK);
     }
 }

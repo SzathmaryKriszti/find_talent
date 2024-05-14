@@ -29,11 +29,6 @@ public class MemberDetailsItem {
         this.repoDetailsItemList = member.getRepository().stream().map(RepoDetailsItem::new).collect(Collectors.toList());
     }
 
-    public MemberDetailsItem() {
-    }
-
-    public MemberDetailsItem(MemberDetailsItem memberDetailsItem) {
-    }
 
     public Long getId() {
         return id;
