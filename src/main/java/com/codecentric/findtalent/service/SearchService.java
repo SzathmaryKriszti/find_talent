@@ -35,7 +35,7 @@ public class SearchService {
             membersByLanguage.add(member);
         }
 
-        Set<Member> uniqueMembers = new HashSet<>(membersByLanguage);
+        Set<Member> uniqueMembers = new LinkedHashSet<>(membersByLanguage);
         membersByLanguage.clear();
         membersByLanguage.addAll(uniqueMembers);
 
