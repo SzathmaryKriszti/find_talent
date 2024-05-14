@@ -52,6 +52,10 @@ public class Repo {
     public Repo() {
     }
 
+    public Repo(Member member, String language) {
+        this.member = member;
+        this.language = language;
+    }
 
     public void setId(Long id) {
         this.id = id;
