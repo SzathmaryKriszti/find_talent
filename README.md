@@ -77,16 +77,6 @@ The purpose of this application is to search in the database of developers at th
 
 
 
-<img width="1000" alt="find_talent_pic2" src="https://github.com/SzathmaryKriszti/find_talent/assets/131468067/89b5a2b3-a5e5-4a27-9db4-bcb0c8187197">
-
-
-----------------------------------------------------------------------------------------------------------------------------
-
-
-
-<img width="1537" alt="find_talent_pic3" src="https://github.com/SzathmaryKriszti/find_talent/assets/131468067/f702ca34-c327-4180-96e3-127ce1d76496">
-
-
 
 
 
