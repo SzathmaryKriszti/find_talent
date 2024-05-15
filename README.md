@@ -1,10 +1,10 @@
-# Find-Talent Application
+# Find Talent Application
 
 
 
-Find Talent is a small Spring Boot application created by Krisztina Szathmary, as a part of the interview process at codecentric AG.
+Find Talent is a small Spring Boot / Angular application created by Krisztina Szathmary, as a part of the interview process at codecentric AG.
 
-The purpose of this application is to search in the database of developers at the company by programming language.
+The purpose of this application is to find developers at the company by programming language.
 
 
 ## Requirements
@@ -15,12 +15,12 @@ The purpose of this application is to search in the database of developers at th
 - Node v20.9.0
 
 
-## Installation
+## Running development environment
 - start docker container
    ```
    docker run --name findtalent-db -p 3306:3306 -v findtalent-volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=test1234 --detach mysql:8.1.0
    ```
-- connect to database and create a new schema "find_talent"
+- connect to the database and create a new schema "find_talent"
   
   ```
   username: root
@@ -28,9 +28,9 @@ The purpose of this application is to search in the database of developers at th
   password: test1234
   ```
 
-- create a personal access token, more instructions can be found [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic).
+- create a GitHub personal access token, more instructions can be found [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic).
 
-- before you start the Srping application export your newly created token as an environment variable like this:
+- before you start the Spring application export your newly created token as an environment variable like this:
 
   ```
   export GITHUB_OAUTH=<your-token>
@@ -44,11 +44,11 @@ The purpose of this application is to search in the database of developers at th
 
 ----------------------------------------------------------------------------------------------------------------------------
 
-- you can start the Spring Boot Application in two way:
+- you can start the Spring Boot Application in two ways:
      - importing the project into IntelliJ as a Spring Boot project
      - from the command line by calling `  mvn clean package  ` followed by `  java -jar find_talent.jar  `
 
-- importing node packages and run frontend
+- installing node packages and run frontend
 
     ```
     npm install
