@@ -32,6 +32,8 @@ public class StartupService {
         this.repoRepository = repoRepository;
     }
 
+//    The @PostConstruct annotation could also be used here, but I used SmartInitialisingSingleton based on this comment:
+//    https://stackoverflow.com/a/48771885
     @Bean
     @Profile("!test")
     public SmartInitializingSingleton init() {
