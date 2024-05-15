@@ -2,7 +2,7 @@
 
 
 
-Find Talent is a small Spring Boot / Angular application created by Krisztina Szathmary, as a part of the interview process at codecentric AG.
+Find Talent is a small Spring Boot / Angular application created by Krisztina Szathmary.
 
 The purpose of this application is to find developers at the company by programming language.
 
