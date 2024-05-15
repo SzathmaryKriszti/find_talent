@@ -46,7 +46,7 @@ The purpose of this application is to find developers at the company by programm
 
 - you can start the Spring Boot Application in two ways:
      - importing the project into IntelliJ as a Spring Boot project
-     - from the command line by calling `  mvn clean package  ` followed by `  java -jar find_talent.jar  `
+     - from the command line by calling `  mvn clean package  ` followed by `  java -jar target/find_talent-0.0.1-SNAPSHOT.jar  `
 
 - installing node packages and run frontend
 

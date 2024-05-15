@@ -4,14 +4,12 @@ import com.codecentric.findtalent.domain.Member;
 import com.codecentric.findtalent.domain.Repo;
 import com.codecentric.findtalent.repository.MemberRepository;
 import com.codecentric.findtalent.repository.RepoRepository;
+import jakarta.annotation.PostConstruct;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
-import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,46 +30,39 @@ public class StartupService {
         this.repoRepository = repoRepository;
     }
 
-//    The @PostConstruct annotation could also be used here, but I used SmartInitialisingSingleton based on this comment:
-//    https://stackoverflow.com/a/48771885
-    @Bean
-    @Profile("!test")
-    public SmartInitializingSingleton init() {
+
+    @PostConstruct
+    public void init() {
 
 
         repoRepository.deleteAll();
         memberRepository.deleteAll();
 
-        SmartInitializingSingleton singleton = new SmartInitializingSingleton() {
-            @Override
-            public void afterSingletonsInstantiated() {
-                GitHub github;
 
-                try {
-                    github = GitHub.connect();
+        GitHub github;
 
-                    GHOrganization org = github.getOrganization("codecentric");
+        try {
+            github = GitHub.connect();
 
-                    List<GHUser> ghUsers = org.getMembers();
+            GHOrganization org = github.getOrganization("codecentric");
 
-                    for (GHUser ghUser : ghUsers) {
+            List<GHUser> ghUsers = org.getMembers();
 
-                        Member member = new Member(ghUser);
-                        Member savedMember = memberRepository.save(member);
-                        Map<String, GHRepository> memberRepos = ghUser.getRepositories();
+            for (GHUser ghUser : ghUsers) {
 
-                        for (GHRepository ghRepository : memberRepos.values()) {
-                            Repo repository = new Repo(ghRepository);
-                            repository.setMember(savedMember);
-                            repoRepository.save(repository);
-                        }
-                    }
+                Member member = new Member(ghUser);
+                Member savedMember = memberRepository.save(member);
+                Map<String, GHRepository> memberRepos = ghUser.getRepositories();
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                for (GHRepository ghRepository : memberRepos.values()) {
+                    Repo repository = new Repo(ghRepository);
+                    repository.setMember(savedMember);
+                    repoRepository.save(repository);
                 }
             }
-        };
-        return singleton;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
