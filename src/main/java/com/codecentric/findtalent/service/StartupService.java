@@ -39,10 +39,8 @@ public class StartupService {
         memberRepository.deleteAll();
 
 
-        GitHub github;
-
         try {
-            github = GitHub.connect();
+            GitHub github = GitHub.connect();
 
             GHOrganization org = github.getOrganization("codecentric");
 
