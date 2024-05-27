@@ -22,9 +22,20 @@
       </div>
     </form>
 
+    <div *ngIf="errorMessage" class="bg-white py-6 sm:py-8 lg:py-12">
+      <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+
+        <p class="mb-2 text-center font-semi-bold text-green-500 md:mb-3 lg:text-lg">There is no member with this language.</p>
+
+       </div>
+    </div>
 
 
-    <div  class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 py-6 sm:py-8 lg:py-10">
+
+
+
+
+    <div *ngIf="!errorMessage" class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 py-6 sm:py-8 lg:py-10">
       <!-- cards - start -->
       <div *ngFor="let member of members" (click)="loadRepos(member.id)" class="flex flex-col overflow-hidden rounded-lg border bg-white">
         <a class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
