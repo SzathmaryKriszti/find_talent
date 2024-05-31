@@ -86,4 +86,5 @@ public class SearchServiceTest {
         assertEquals(2, actualMemberDetailsItems.size());
 
     }
+
 }
