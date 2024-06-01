@@ -22,14 +22,14 @@ export class SearchMemberComponent implements OnInit {
     this.searchForm = formBuilder.group({
       language: ['', Validators.required]
     })
+  }
+
+  ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(
       params => {
         this.searchForm.controls['language'].setValue(params['language'])
       }
     );
-  }
-
-  ngOnInit(): void {
     this.search();
   }
 
