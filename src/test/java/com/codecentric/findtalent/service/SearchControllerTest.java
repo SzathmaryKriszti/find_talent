@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -27,7 +28,9 @@ public class SearchControllerTest {
 
 
     @BeforeEach
-    public void setUp() {this.searchController = new SearchController(testSearchService);}
+    public void setUp() {
+        this.searchController = new SearchController(testSearchService);
+    }
 
 
     @Test
@@ -46,6 +49,35 @@ public class SearchControllerTest {
         verify(testSearchService, times(1)).searchMemberByLanguage(language);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(expectedMemberList.get(0).getId(), Objects.requireNonNull(response.getBody()).get(0).getId());
+    }
 
+    @Test
+    public void getMemberDetailsByNotEmptyOptionalTest() {
+
+        MemberDetailsItem expectedMemberDetailsItem = new MemberDetailsItem();
+        expectedMemberDetailsItem.setId(1L);
+
+        when(testSearchService.getMemberDetails(1L)).thenReturn(Optional.of(expectedMemberDetailsItem));
+
+        ResponseEntity<MemberDetailsItem> response = searchController.getMemberDetails(1L);
+
+        verify(testSearchService, times(1)).getMemberDetails(1L);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(expectedMemberDetailsItem.getId(), Objects.requireNonNull(response.getBody()).getId());
+    }
+
+    @Test
+    public void getMemberDetailsByEmptyOptionalTest() {
+
+
+        Optional<MemberDetailsItem> expectedMember = Optional.empty();
+
+        when(testSearchService.getMemberDetails(2L)).thenReturn(Optional.empty());
+
+        ResponseEntity<MemberDetailsItem> response = searchController.getMemberDetails(2L);
+
+        verify(testSearchService, times(1)).getMemberDetails(2L);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(expectedMember, Optional.empty());
     }
 }
