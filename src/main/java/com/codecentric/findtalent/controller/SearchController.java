@@ -31,7 +31,7 @@ public class SearchController {
 
         Optional<MemberDetailsItem> optionalMemberDetailsItem = searchService.getMemberDetails(id);
         if (optionalMemberDetailsItem.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         MemberDetailsItem memberDetailsItem = optionalMemberDetailsItem.get();
         return new ResponseEntity<>(memberDetailsItem, HttpStatus.OK);
