@@ -10,13 +10,14 @@ const BASE_URL: string = 'http://localhost:8080/api/searches'
 })
 export class SearchService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  search(language: string):Observable<Array<MemberDetailsItemModel>>{
+  search(language: string): Observable<Array<MemberDetailsItemModel>> {
     return this.http.get<Array<MemberDetailsItemModel>>(`${BASE_URL}/member?language=${encodeURIComponent(language)}`)
   };
 
-  loadMemberDetails(id: number):Observable<MemberDetailsItemModel>{
+  loadMemberDetails(id: number): Observable<MemberDetailsItemModel> {
     return this.http.get<MemberDetailsItemModel>(`${BASE_URL}/member-details/${id}`)
   };
 }
