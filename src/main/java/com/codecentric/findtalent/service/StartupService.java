@@ -35,10 +35,6 @@ public class StartupService {
     public void init() {
 
 
-        repoRepository.deleteAll();
-        memberRepository.deleteAll();
-
-
         try {
             GitHub github = GitHub.connect();
 
