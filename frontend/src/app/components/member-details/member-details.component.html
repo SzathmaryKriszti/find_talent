@@ -66,6 +66,7 @@
 
           <div>
             <p
+              [ngClass]="{'text-red-400': memberDetails.repoDetailsItemList.length > 25}"
               class="font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">
               Language: {{repo.language}}</p>
           </div>
