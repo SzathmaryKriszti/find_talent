@@ -28,7 +28,8 @@ public class SearchService {
 
     public List<MemberDetailsItem> searchMemberByLanguage(String language) {
         List<Member> membersByLanguage = new ArrayList<>();
-        List<Repo> repos = repoRepository.findReposByLanguage(language);
+        String languageLowerCase = language.toLowerCase();
+        List<Repo> repos = repoRepository.findReposByLanguage(languageLowerCase);
 
         for (Repo repo : repos) {
             Member member = repo.getMember();

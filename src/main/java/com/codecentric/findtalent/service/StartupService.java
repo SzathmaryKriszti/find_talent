@@ -50,6 +50,10 @@ public class StartupService {
 
                 for (GHRepository ghRepository : memberRepos.values()) {
                     Repo repository = new Repo(ghRepository);
+
+                    if (repository.getLanguage() != null){
+                        repository.setLanguage(repository.getLanguage().toLowerCase());
+                    }
                     repository.setMember(savedMember);
                     repoRepository.save(repository);
                 }
