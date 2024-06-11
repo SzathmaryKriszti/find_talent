@@ -77,7 +77,7 @@ public class SearchControllerTest {
         ResponseEntity<MemberDetailsItem> response = searchController.getMemberDetails(2L);
 
         verify(testSearchService, times(1)).getMemberDetails(2L);
-        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         Assertions.assertEquals(expectedMember, Optional.empty());
     }
 }
