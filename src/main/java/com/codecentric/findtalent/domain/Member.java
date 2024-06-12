@@ -6,6 +6,7 @@ import org.kohsuke.github.GHUser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "members")
@@ -68,6 +69,17 @@ public class Member {
     public Member() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Member member)) return false;
+        return Objects.equals(getId(), member.getId()) && Objects.equals(getUsername(), member.getUsername()) && Objects.equals(getName(), member.getName()) && Objects.equals(getLocation(), member.getLocation()) && Objects.equals(getEmail(), member.getEmail()) && Objects.equals(getBio(), member.getBio()) && Objects.equals(getCreatedAt(), member.getCreatedAt()) && Objects.equals(getAvatarUrl(), member.getAvatarUrl()) && Objects.equals(getRepository(), member.getRepository());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUsername(), getName(), getLocation(), getEmail(), getBio(), getCreatedAt(), getAvatarUrl(), getRepository());
+    }
 
     public Long getId() {
         return id;
