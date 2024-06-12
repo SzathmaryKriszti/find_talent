@@ -40,7 +40,7 @@ public class StartupService {
 
         GHOrganization org = github.getOrganization("codecentric");
 
-        List<GHUser> ghUsers = org.getMembers();
+        List<GHUser> ghUsers = org.listMembers().toList();
 
         for (GHUser ghUser : ghUsers) {
 
