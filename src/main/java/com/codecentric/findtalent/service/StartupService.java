@@ -5,10 +5,7 @@ import com.codecentric.findtalent.domain.Repo;
 import com.codecentric.findtalent.repository.MemberRepository;
 import com.codecentric.findtalent.repository.RepoRepository;
 import jakarta.annotation.PostConstruct;
-import org.kohsuke.github.GHOrganization;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
+import org.kohsuke.github.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,35 +29,31 @@ public class StartupService {
 
 
     @PostConstruct
-    public void init() {
+    public void init() throws IOException {
 
 
         repoRepository.deleteAll();
         memberRepository.deleteAll();
 
 
-        try {
-            GitHub github = GitHub.connect();
+        GitHub github = GitHub.connect();
 
-            GHOrganization org = github.getOrganization("codecentric");
+        GHOrganization org = github.getOrganization("codecentric");
 
-            List<GHUser> ghUsers = org.getMembers();
+        List<GHUser> ghUsers = org.getMembers();
 
-            for (GHUser ghUser : ghUsers) {
+        for (GHUser ghUser : ghUsers) {
 
-                Member member = new Member(ghUser);
-                Member savedMember = memberRepository.save(member);
-                Map<String, GHRepository> memberRepos = ghUser.getRepositories();
+            Member member = new Member(ghUser);
+            Member savedMember = memberRepository.save(member);
+            Map<String, GHRepository> memberRepos = ghUser.getRepositories();
 
-                for (GHRepository ghRepository : memberRepos.values()) {
-                    Repo repository = new Repo(ghRepository);
-                    repository.setMember(savedMember);
-                    repoRepository.save(repository);
-                }
+            for (GHRepository ghRepository : memberRepos.values()) {
+                Repo repository = new Repo(ghRepository);
+                repository.setMember(savedMember);
+                repoRepository.save(repository);
             }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
     }
 }
