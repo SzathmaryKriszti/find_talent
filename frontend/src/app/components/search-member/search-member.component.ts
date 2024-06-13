@@ -1,19 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SearchService} from "../../services/search.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MemberDetailsItemModel} from "../../models/member-details-item.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-search-member',
   templateUrl: './search-member.component.html',
   styleUrls: ['./search-member.component.css']
 })
-export class SearchMemberComponent implements OnInit {
+export class SearchMemberComponent implements OnInit, OnDestroy {
 
   members: Array<MemberDetailsItemModel> = [];
   searchForm!: FormGroup
   errorMessage: Boolean = false;
+  private searchSubscription: Subscription | undefined;
+  private queryParamSubscription: Subscription | undefined;
 
   constructor(private searchService: SearchService,
               private formBuilder: FormBuilder,
@@ -24,8 +27,13 @@ export class SearchMemberComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this.searchSubscription?.unsubscribe();
+    this.queryParamSubscription?.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(
+   this.queryParamSubscription = this.activatedRoute.queryParams.subscribe(
       params => {
         this.searchForm.controls['language'].setValue(params['language'])
       }
@@ -36,7 +44,7 @@ export class SearchMemberComponent implements OnInit {
 
   search() {
     if (this.searchForm.get('language')?.value) {
-      this.searchService.search(this.searchForm.get('language')?.value).subscribe({
+      this.searchSubscription = this.searchService.search(this.searchForm.get('language')?.value).subscribe({
         next: (value) => {
           if (value.length === 0) {
             this.errorMessage = true
