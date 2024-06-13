@@ -35,15 +35,15 @@ public class SearchServiceTest {
     @Test
     public void searchMemberByLanguageTest() {
 
-        String language = "Scala";
+        String language = "scala";
 
         Member member1 = new Member();
         Member member2 = new Member();
 
-        Repo repo1 = new Repo(member1, "Java");
-        Repo repo2 = new Repo(member1, "Scala");
-        Repo repo3 = new Repo(member2, "Java");
-        Repo repo4 = new Repo(member2, "Scala");
+        Repo repo1 = new Repo(member1, "java");
+        Repo repo2 = new Repo(member1, "scala");
+        Repo repo3 = new Repo(member2, "java");
+        Repo repo4 = new Repo(member2, "scala");
 
         member1.setId(1L);
         member1.setUsername("username");

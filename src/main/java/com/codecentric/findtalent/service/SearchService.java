@@ -24,7 +24,8 @@ public class SearchService {
 
 
     public List<MemberDetailsItem> searchMemberByLanguage(String language) {
-        List<Member> membersByLanguage = memberRepository.findDistinctMembersByRepositoryLanguage(language);
+        String languageLowerCase = language.toLowerCase();
+        List<Member> membersByLanguage = memberRepository.findDistinctMembersByRepositoryLanguage(languageLowerCase);
 
         return membersByLanguage.stream().map(MemberDetailsItem::new).collect(Collectors.toList());
     }

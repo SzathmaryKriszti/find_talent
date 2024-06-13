@@ -5,7 +5,10 @@ import com.codecentric.findtalent.domain.Repo;
 import com.codecentric.findtalent.repository.MemberRepository;
 import com.codecentric.findtalent.repository.RepoRepository;
 import jakarta.annotation.PostConstruct;
-import org.kohsuke.github.*;
+import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
+import org.kohsuke.github.GitHub;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +34,6 @@ public class StartupService {
     @PostConstruct
     public void init() throws IOException {
 
-
-        repoRepository.deleteAll();
-        memberRepository.deleteAll();
-
-
         GitHub github = GitHub.connect();
 
         GHOrganization org = github.getOrganization("codecentric");
@@ -50,6 +48,10 @@ public class StartupService {
 
             for (GHRepository ghRepository : memberRepos.values()) {
                 Repo repository = new Repo(ghRepository);
+
+                if (repository.getLanguage() != null) {
+                    repository.setLanguage(repository.getLanguage().toLowerCase());
+                }
                 repository.setMember(savedMember);
                 repoRepository.save(repository);
             }
