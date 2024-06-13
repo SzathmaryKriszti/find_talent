@@ -4,7 +4,6 @@ import com.codecentric.findtalent.domain.Member;
 import com.codecentric.findtalent.domain.Repo;
 import com.codecentric.findtalent.dto.outgoing.MemberDetailsItem;
 import com.codecentric.findtalent.repository.MemberRepository;
-import com.codecentric.findtalent.repository.RepoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,14 +25,11 @@ public class SearchServiceTest {
     private SearchService testSearchService;
 
     @Mock
-    private RepoRepository testRepoRepository;
-
-    @Mock
     private MemberRepository testMemberRepository;
 
     @BeforeEach
     public void setUp() {
-        this.testSearchService = new SearchService(testMemberRepository, testRepoRepository);
+        this.testSearchService = new SearchService(testMemberRepository);
     }
 
     @Test
@@ -73,12 +69,12 @@ public class SearchServiceTest {
                 repo3, repo4
         ));
 
-        List<Repo> reposByLanguage = new ArrayList<>();
-        reposByLanguage.add(repo2);
-        reposByLanguage.add(repo4);
+        List<Member> membersByLanguage = new ArrayList<>();
+       membersByLanguage.add(member1);
+       membersByLanguage.add(member2);
 
 
-        when(testRepoRepository.findReposByLanguage(language)).thenReturn(reposByLanguage);
+        when(testMemberRepository.findDistinctMembersByRepositoryLanguage(language)).thenReturn(membersByLanguage);
 
         List<MemberDetailsItem> actualMemberDetailsItems = testSearchService.searchMemberByLanguage(language);
 
