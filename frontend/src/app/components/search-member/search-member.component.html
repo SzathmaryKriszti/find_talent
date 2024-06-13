@@ -55,7 +55,7 @@
 
               <div>
                 <span class="block text-green-500">{{member.username}}</span>
-                <span class="block text-sm text-gray-400">{{member.createdAt.substring(0,11)}}</span>
+                <span class="block text-sm text-gray-400">Joined since {{member.createdAt.substring(member.createdAt.length - 4,member.createdAt.length)}}</span>
               </div>
             </div>
 
