@@ -1,6 +1,7 @@
 package com.codecentric.findtalent.controller;
 
 import com.codecentric.findtalent.dto.outgoing.MemberDetailsItem;
+import com.codecentric.findtalent.dto.outgoing.SearchDetailsItem;
 import com.codecentric.findtalent.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class SearchController {
     }
 
     @GetMapping("/member")
-    public ResponseEntity<List<MemberDetailsItem>> searchMemberByLanguage(@RequestParam String language) {
+    public ResponseEntity<List<SearchDetailsItem>> searchMemberByLanguage(@RequestParam String language) {
         return new ResponseEntity<>(searchService.searchMemberByLanguage(language), HttpStatus.OK);
     }
 

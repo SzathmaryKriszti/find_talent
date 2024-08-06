@@ -2,6 +2,7 @@ package com.codecentric.findtalent.service;
 
 import com.codecentric.findtalent.domain.Member;
 import com.codecentric.findtalent.dto.outgoing.MemberDetailsItem;
+import com.codecentric.findtalent.dto.outgoing.SearchDetailsItem;
 import com.codecentric.findtalent.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,11 @@ public class SearchService {
     }
 
 
-    public List<MemberDetailsItem> searchMemberByLanguage(String language) {
+    public List<SearchDetailsItem> searchMemberByLanguage(String language) {
         String languageLowerCase = language.toLowerCase();
         List<Member> membersByLanguage = memberRepository.findDistinctMembersByRepositoryLanguage(languageLowerCase);
 
-        return membersByLanguage.stream().map(MemberDetailsItem::new).collect(Collectors.toList());
+        return membersByLanguage.stream().map(SearchDetailsItem::new).collect(Collectors.toList());
     }
 
 
